@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TopNewsApi.Core.DTO_s.Token;
 using TopNewsApi.Core.DTO_s.User;
 using TopNewsApi.Core.Entities.User;
 
@@ -105,10 +106,11 @@ namespace TopNewsApi.Core.Services
             await _signInManager.SignOutAsync();
         }
 
-        //public async Task<List<IdentityRole>> LoadRoles()
-        //{
-        //    var roles = await _roleManager.Roles.ToListAsync();
-        //    return roles;
-        //}
+
+        public async Task<ServiceResponse> RefreshTokenAsync(TokenRequestDto model)
+        {
+            return await _jwtService.VerifyTokenAsync(model);
+        }
+
     }
 }

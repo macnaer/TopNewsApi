@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using TopNewsApi.Core.DTO_s.User;
 using TopNewsApi.Core.Services;
 using TopNewsApi.Core.Validations.User;
+using TopNewsApi.Core.DTO_s.Token;
 
 namespace TopNewsApi.Api.Controllers
 {
@@ -39,6 +40,14 @@ namespace TopNewsApi.Api.Controllers
             }
 
             return BadRequest(validationResult.Errors[0].ToString());
+        }
+
+        [AllowAnonymous]
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshTokenAsync([FromBody] TokenRequestDto model)
+        {
+            var result = await _userService.RefreshTokenAsync(model);
+            return Ok(result);
         }
     }
 }
