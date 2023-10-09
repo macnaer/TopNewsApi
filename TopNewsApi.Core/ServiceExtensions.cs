@@ -13,6 +13,8 @@ namespace TopNewsApi.Core
     {
         public static void AddCoreServices(this IServiceCollection services)
         {
+            // Add email service
+            services.AddTransient<EmailService>();
             services.AddTransient<UserService>();
             services.AddTransient<JwtService>();
         }
